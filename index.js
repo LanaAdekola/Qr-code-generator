@@ -4,16 +4,21 @@
 3. Create a txt file to save the user input using the native fs node module.
 */
 import inquirer from 'inquirer';
+var qr = require('qr-image');
+
 
 inquirer
   .prompt([
     {
     message:"What is your password",
-    namee: "url"
+    namee: "URL"
     }
 ])
   .then((answers) => {
-    "eternal life"
+    const url = answers.URL
+        var qr_svg = qr.image(url)
+        qr_svg.pipe(require('fs').createWriteStream('qr_img.png'));
+ 
   })
   .catch((error) => {
     if (error.isTtyError) {
